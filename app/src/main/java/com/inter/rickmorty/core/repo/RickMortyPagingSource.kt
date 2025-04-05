@@ -3,6 +3,8 @@ package com.inter.rickmorty.core.repo
 import androidx.core.net.toUri
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.runBlocking
 import okio.IOException
 
 internal class RickMortyPagingSource(
@@ -19,8 +21,20 @@ internal class RickMortyPagingSource(
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, SearchResult> {
         return try {
-            val page = params.key ?: 1
-            val response = api.getCharactersByName(page, query).execute()
+
+            // If there is no query string then sent and empty set
+            if (query.isEmpty()) {
+                return LoadResult.Page(
+                    data = emptyList(),
+                    prevKey = null,
+                    nextKey = null
+                )
+            }
+
+            val response = runBlocking(Dispatchers.IO) {
+                val page = params.key ?: 1
+                api.getCharactersByName(page, query).execute()
+            }
 
             if (response.isSuccessful) {
                 val info = response.body()!!.info

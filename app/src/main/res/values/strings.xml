@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">RickMorty</string>
+    <string name="loading_text">Loading....</string>
+    <string name="empty_state_text">Start Type a name....</string>
+    <string name="search_placeholder">Search by name</string>
+    <string name="name_label">Name</string>
+    <string name="type_label">Type</string>
+    <string name="status_label">Status</string>
+    <string name="species_label">Species</string>
+    <string name="origin_label">Origin</string>
+    <string name="created_label">Created</string>
+    <string name="warning_desc">Warning</string>
+    <string name="error_desc">Error</string>
+    <string name="detail_fail_error_text">Fail to load detail information</string>
+    <string name="fail_load_results">There was an error while loading results. Please try again....</string>
 </resources>
