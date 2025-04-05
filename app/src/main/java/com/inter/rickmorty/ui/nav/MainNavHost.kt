@@ -13,6 +13,12 @@ import com.inter.rickmorty.ui.vm.SharedViewModel
 private const val HomeScreen = "Home"
 private const val CharacterScreen = "Detail"
 
+/**
+ * MainNavHost
+ *
+ * Navigation Host use to transition from one screen to the other
+ */
+
 @Composable
 fun MainNavHost(
     mainNavController: NavHostController,

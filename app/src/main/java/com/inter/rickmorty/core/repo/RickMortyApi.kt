@@ -5,6 +5,9 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 import java.util.Date
 
+/**
+ *  Top level Result return from search api
+ */
 data class SearchResults(
     val info: Info,
     val results: List<SearchResult>
@@ -17,6 +20,9 @@ data class SearchResults(
     )
 }
 
+/**
+ * Character Information
+ */
 data class SearchResult(
     val id: Int,
     val name: String,
@@ -32,8 +38,17 @@ data class SearchResult(
     )
 }
 
+/**
+ * Interface for the backend api. This will be initialize via Retrofit
+ */
 interface RickMortyApi {
 
+    /**
+     * Get the character with has a name that matches the query string
+     *
+     * @param page The page for the result
+     * @param query The query string being passed to the backend
+     */
     @GET("character?")
     fun getCharactersByName(@Query("page") page: Int, @Query("name") query: String): Call<SearchResults>
 }

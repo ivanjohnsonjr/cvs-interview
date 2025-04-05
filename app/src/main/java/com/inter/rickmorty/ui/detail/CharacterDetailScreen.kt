@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Arrangement.Absolute.spacedBy
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -34,14 +33,23 @@ import com.inter.rickmorty.ui.theme.Dimen
 import com.inter.rickmorty.ui.vm.SharedViewModel
 
 
+/**
+ * Helper extension function used to make a displayable date string
+ */
 private val SearchResult.formatedDate: String
     get() {
         return UIConstants.dateTimeFormatter.format(created)
     }
 
+/**
+ * Helper extension function used determine if Type is present in the result
+ */
 private val SearchResult.hasType: Boolean
     get() = !type.isNullOrEmpty()
 
+/**
+ * Detail screen for Characters after they are selected
+ */
 @Composable
 fun CharacterDetailScreen(
     modifier: Modifier = Modifier,

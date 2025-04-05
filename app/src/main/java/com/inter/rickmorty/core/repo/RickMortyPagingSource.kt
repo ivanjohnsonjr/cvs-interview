@@ -7,6 +7,14 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import okio.IOException
 
+/**
+ * RickMortyPagingSource
+ *
+ * Paging Source which will handle fetching the data from the backend in a paging manner.
+ *
+ * @param api service api call to retrieve data from backend
+ * @param query the query string sent to the api
+ */
 internal class RickMortyPagingSource(
     private val api: RickMortyApi,
     private val query: String
