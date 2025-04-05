@@ -3,6 +3,7 @@ package com.inter.rickmorty.ui.home
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -232,14 +233,16 @@ private fun CharacterView(
         onClick = onClick
     ) {
         AsyncImage(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier
+                .defaultMinSize(minHeight = Dimen.imageMinDimension, minWidth = Dimen.imageMinDimension)
+                .fillMaxSize(),
             model = ImageRequest.Builder(LocalContext.current)
                 .data(searchResult.image)
                 .crossfade(true)
                 .build(),
             placeholder = rememberVectorPainter(Icons.Filled.Person),
             contentDescription = "",
-            contentScale = ContentScale.Fit
+            contentScale = ContentScale.Crop
         )
     }
 }
