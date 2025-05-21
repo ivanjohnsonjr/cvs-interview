@@ -4,7 +4,7 @@ import androidx.core.net.toUri
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
 import okio.IOException
 
 /**
@@ -39,7 +39,7 @@ internal class RickMortyPagingSource(
                 )
             }
 
-            val response = runBlocking(Dispatchers.IO) {
+            val response = withContext(Dispatchers.IO) {
                 val page = params.key ?: 1
                 api.getCharactersByName(page, query).execute()
             }

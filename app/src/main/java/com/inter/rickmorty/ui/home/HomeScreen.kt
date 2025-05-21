@@ -26,9 +26,6 @@ import androidx.compose.material3.SearchBarDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -62,14 +59,10 @@ fun HomeScreen(
     val state by viewModel.uiState.collectAsStateWithLifecycle()
     val searchResults: LazyPagingItems<SearchResult> = viewModel.searchResultDataFlow.collectAsLazyPagingItems()
 
-    val showEmpty = remember(state.query) {
-        state.query.isBlank()
-    }
-
     InternalHomeScreen(
         modifier = modifier,
         query = state.query,
-        showEmpty = showEmpty,
+        showEmpty = state.showEmpty,
         isLoading = state.isLoading,
         searchResults = searchResults,
         onSearch = { query ->
@@ -186,15 +179,12 @@ private fun LocalSearchBar(
     isLoading: Boolean,
     onSearch: (String) -> Unit
 ) {
-    var text by remember { mutableStateOf(query) }
-
     SearchBar(
         modifier = modifier,
         inputField = {
             SearchBarDefaults.InputField(
-                query = text,
+                query = query,
                 onQueryChange = {
-                    text = it
                     onSearch(it)
                 },
                 onSearch = { },

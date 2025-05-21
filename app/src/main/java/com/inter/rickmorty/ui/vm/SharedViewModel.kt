@@ -31,7 +31,9 @@ class SharedViewModel @Inject constructor(
         val query: String = "",
         val isLoading: Boolean = false,
         val selected: SearchResult? = null
-    )
+    ) {
+        val showEmpty: Boolean = query.isEmpty()
+    }
 
     private val _uiState = MutableStateFlow(UiStateData())
     val uiState = _uiState.asStateFlow()
